@@ -13,7 +13,9 @@ public class KeyboardInput {
         Scanner scanner = new Scanner(System.in);
         String value = "";
 
-        value = scanner.nextLine();
+        if(scanner.hasNext()) {
+            value = scanner.nextLine();
+        }
 
         this.checkIfInputIsEmpty(value);
         return value;
@@ -23,7 +25,9 @@ public class KeyboardInput {
         Scanner scanner = new Scanner(System.in);
         String value = "";
 
-        value = scanner.nextLine();
+        if(scanner.hasNext()) {
+            value = scanner.nextLine();
+        }
 
         this.checkIfInputIsEmpty(value);
         try {
