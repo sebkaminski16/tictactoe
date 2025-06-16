@@ -6,11 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
-    public enum GameMode {
-        HUMAN_VS_HUMAN,
-        COMPUTER_VS_HUMAN
-    }
-
     private final List<Player> players = new ArrayList<>(2);
     private List<Symbol> gameBoard = null;
     private GameMode gameMode = null;
@@ -44,15 +39,23 @@ public class Game {
         return currentlyPlayingPlayer;
     }
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public int getCellsInRow() {
+        return cellsInRow;
+    }
+
     //CONFIGURATION
 
     public void configure(GameBoardSize size, String... playerNames) {
+        if(playerNames == null || (playerNames.length > 0 && Arrays.stream(playerNames).toList().contains(null))) throw new PlayerNameIsNullException("Player name cannot be null!");
+        if(playerNames.length == 0) throw new PlayerNameIsNullException("At least 1 player name has to be specified!");
         String player1name = playerNames[0];
         String player2name;
-        if(player1name == null) throw new PlayerNameIsNullException("Player 1 name is null!");
         if(playerNames.length > 1) {
             player2name = playerNames[1];
-            if(player2name == null) throw new PlayerNameIsNullException("Player 2 name is null!");
             if(player1name.equals(player2name)) throw new PlayerNameDuplicateException("The name of player 1 cannot be the same as the name of player 2");
         } else {
             player2name = "Computer";
